@@ -12,7 +12,7 @@ You will need:
 Clone this repository:
 
 ```bash
-$ git glone https://github.com/torqueforge/careerbuilder-2014-april.git
+$ git clone https://github.com/torqueforge/careerbuilder-2014-april.git
 ```
 
 Change directories so that you are in the project:
