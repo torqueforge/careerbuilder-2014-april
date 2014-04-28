@@ -136,3 +136,7 @@ Then tell git to create a new copy of master, throwing away the old one:
 ```bash
 $ git reset --hard origin/master
 ```
+
+## Resources
+
+* [String Mutation Exercises](https://github.com/JumpstartLab/ruby-exercises/tree/master/mutation) start with the file `mutating_strings.rb`, then do `sparkly_test.rb` and `reading_list_test.rb`
