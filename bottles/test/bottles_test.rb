@@ -1,9 +1,9 @@
-gem 'minitest', '~> 4.2'
+gem 'minitest', '~> 5.3'
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative 'bottles'
 
-class BottlesTest < MiniTest::Unit::TestCase
+class BottlesTest < Minitest::Test
 
   attr_reader :bottles
   def setup
