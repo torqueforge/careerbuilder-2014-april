@@ -8,18 +8,28 @@ class Bottles
   end
 
   def verse(num)
-    "#{quantity(num).capitalize} #{container(num)} of beer on the wall, " +
-    "#{quantity(num)} #{container(num)} of beer.\n" +
-    "#{action(num)}, " +
-    "#{quantity(num-1)} #{container(num-1)} of beer on the wall.\n"
+    Verse.new(num).to_s
+  end
+end
+
+class Verse
+  attr_reader :num
+
+  def initialize(num)
+    @num = num
+  end
+
+  def to_s
+    "#{current_quantity.capitalize} #{current_container} of beer on the wall, " +
+    "#{current_quantity} #{current_container} of beer.\n" +
+    "#{action}, " +
+    "#{remaining_quantity} #{remaining_container} of beer on the wall.\n"
   end
 
   private
 
-  def quantity(num)
+  def current_quantity
     case num
-    when -1
-      99.to_s
     when 0
       'no more'
     else
@@ -27,7 +37,18 @@ class Bottles
     end
   end
 
-  def container(num)
+  def remaining_quantity
+    case num
+    when 0
+      99.to_s
+    when 1
+      'no more'
+    else
+      (num - 1).to_s
+    end
+  end
+
+  def current_container
     case num
     when 1
       'bottle'
@@ -36,16 +57,25 @@ class Bottles
     end
   end
 
-  def action(num)
+  def remaining_container
+    case num
+    when 2
+      'bottle'
+    else
+      'bottles'
+    end
+  end
+
+  def action
     case num
     when 0
       "Go to the store and buy some more"
     else
-      "Take #{pronoun(num)} down and pass it around"
+      "Take #{pronoun} down and pass it around"
     end
   end
 
-  def pronoun(num)
+  def pronoun
     case num
     when 1
       'it'
