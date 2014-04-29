@@ -13,10 +13,11 @@ class Bottles
 end
 
 class Verse
-  attr_reader :num
+  attr_reader :num, :variant
 
   def initialize(num)
     @num = num
+    @variant = verse_variant
   end
 
   def to_s
@@ -28,59 +29,103 @@ class Verse
 
   private
 
+  def verse_variant
+    begin
+      Object.const_get("Variant#{num}")
+    rescue
+      Variant
+    end.new(num)
+  end
+
   def current_quantity
-    case num
-    when 0
-      'no more'
-    else
-      num.to_s
-    end
+    variant.current_quantity
   end
 
   def remaining_quantity
-    case num
-    when 0
-      99.to_s
-    when 1
-      'no more'
-    else
-      (num - 1).to_s
-    end
+    variant.remaining_quantity
   end
 
   def current_container
-    case num
-    when 1
-      'bottle'
-    else
-      'bottles'
-    end
+    variant.current_container
   end
 
   def remaining_container
-    case num
-    when 2
-      'bottle'
-    else
-      'bottles'
-    end
+    variant.remaining_container
   end
 
   def action
-    case num
-    when 0
-      "Go to the store and buy some more"
-    else
-      "Take #{pronoun} down and pass it around"
-    end
+    variant.action
   end
 
   def pronoun
-    case num
-    when 1
-      'it'
-    else
-      'one'
-    end
+    variant.pronoun
+  end
+end
+
+class Variant
+  attr_reader :num
+
+  def initialize(num)
+    @num = num
+  end
+
+  def current_quantity
+    num.to_s
+  end
+
+  def remaining_quantity
+    (num - 1).to_s
+  end
+
+  def current_container
+    'bottles'
+  end
+
+  def remaining_container
+    'bottles'
+  end
+
+  def action
+    "Take #{pronoun} down and pass it around"
+  end
+
+  def pronoun
+    'one'
+  end
+end
+
+class Variant0 < Variant
+  def current_quantity
+    'no more'
+  end
+
+  def remaining_quantity
+    99.to_s
+  end
+
+  def action
+    "Go to the store and buy some more"
+  end
+end
+
+class Variant1 < Variant
+  def current_container
+    'bottle'
+  end
+
+  def remaining_quantity
+    'no more'
+  end
+
+  private
+
+  def pronoun
+    'it'
+  end
+end
+
+class Variant2 < Variant
+  def remaining_container
+    'bottle'
   end
 end
