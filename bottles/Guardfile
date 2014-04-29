@@ -1,0 +1,4 @@
+guard :minitest do
+  watch(%r{^test/(.*)\/?(.*)_test\.rb$})
+  watch(%r{^lib/(.*/)?([^/]+)\.rb$})     { "test/bottles_test.rb" }  
+end
