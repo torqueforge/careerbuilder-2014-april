@@ -123,7 +123,7 @@ She swallowed the bird to catch the spider that wriggled and jiggled and tickled
 She swallowed the spider to catch the fly.
 I don't know why she swallowed the fly. Perhaps she'll die.
 VERSES
-    assert_equal expected, food_chain.verses(3, 6)
+    assert_equal expected, food_chain.verses(3, 5)
   end
 
   def test_the_whole_song
